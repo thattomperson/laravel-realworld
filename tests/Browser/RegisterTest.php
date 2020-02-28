@@ -17,6 +17,7 @@ class RegisterTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
+                ->dump()
                 ->assertSee('Sign up');
         });
     }

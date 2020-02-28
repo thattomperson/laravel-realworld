@@ -24,8 +24,11 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
-    - name: Execute tests (Dusk) via Artisan dusk
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: php artisan dusk:install && php artisan dusk
+    - name: Upgrade Chrome Driver
+      run: php artisan dusk:chrome-driver
+    - name: Start Chrome Driver
+      run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+    - name: Run Laravel Server
+      run: php artisan serve &
+    - name: Run Dusk Tests
+      run: php artisan dusk
