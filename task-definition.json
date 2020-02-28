@@ -1,0 +1,33 @@
+{
+  "family": "laravel-realworld",
+  "containerDefinitions": [
+    {
+      "name": "laravel-realworld",
+      "essential": true,
+      "environment": [
+        {
+          "name": "CMD_PREFIX",
+          "value": "/"
+        }
+      ],
+      "portMappings": [
+        {
+            "containerPort": 80,
+            "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/laravel-realworld",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "memory": 200,
+      "memoryReservation": 100
+    }
+  ],
+  "requiresCompatibilities": ["EC2"]
+}
