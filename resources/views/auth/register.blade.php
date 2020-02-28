@@ -6,18 +6,23 @@
       <div class="row">
   
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign up</h1>
+          <h1 class="text-xs-center">Register</h1>
           <p class="text-xs-center">
-            <a href="">Have an account?</a>
+            <a href="/login">Have an account?</a>
           </p>
   
+          @if($errors->any())
           <ul class="error-messages">
-            <li>That email is already taken</li>
+              @foreach ($errors as $error)
+              <li>{{ $error }}</li>
+              @endforeach
           </ul>
+          @endif
   
           <form method="POST">
+            @csrf
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Your Name">
+              <input name="name" class="form-control form-control-lg" type="text" placeholder="Your Name">
             </fieldset>
             <fieldset class="form-group">
               <input name="email" class="form-control form-control-lg" type="text" placeholder="Email">
@@ -26,10 +31,10 @@
               <input name="password" class="form-control form-control-lg" type="password" placeholder="Password">
             </fieldset>
             <fieldset class="form-group">
-                <input name="password_confirmimation" class="form-control form-control-lg" type="password" placeholder="Password">
+                <input name="password_confirmation" class="form-control form-control-lg" type="password" placeholder="Password">
             </fieldset>
-            <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
-              Sign up
+            <button type="submit" dusk="submit-button" class="btn btn-lg btn-primary pull-xs-right">
+              Register
             </button>
           </form>
         </div>

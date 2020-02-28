@@ -15,23 +15,35 @@
       <div class="container">
         <a class="navbar-brand" href="index.html">conduit</a>
         <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item">
-            <!-- Add "active" class when you're on that page" -->
-            <a class="nav-link active" href="">Home</a>
-          </li>
+            <li class="nav-item">
+                <!-- Add "active" class when you're on that page" -->
+                <a class="nav-link" href="">Home</a>
+            </li>
+        @if(Auth::check())
           <li class="nav-item">
             <a class="nav-link" href="">
               <i class="ion-compose"></i>&nbsp;New Post
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-gear-a"></i>&nbsp;Settings
+            <a class="nav-link" href="/profile">
+              <img src="{{ Auth::user()->avatar() }}?s=20">&nbsp;{{ Auth::user()->name }}
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Sign up</a>
+            <form action="/logout" method="POST">
+                @csrf
+                <button class="nav-link btn" type="submit">Logout</button>
+            </form>
           </li>
+          @else
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+          @endif
         </ul>
       </div>
     </nav>

@@ -2,7 +2,6 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -17,8 +16,12 @@ class RegisterTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
-                ->dump()
-                ->assertSee('Sign up');
+                ->assertSee('Sign up')
+                ->type('email', 'tom@ttp.sh')
+                ->type('password', 'password123')
+                ->type('password_confirmation', 'password123')
+                ->click('@submit-button')
+                ->dump();
         });
     }
 }
