@@ -24,8 +24,8 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
+    - name: Execute tests (Dusk) via Artisan dusk
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan dusk
+      run: php artisan dusk:install && php artisan dusk
