@@ -6,8 +6,20 @@
       "essential": true,
       "environment": [
         {
-          "name": "CMD_PREFIX",
-          "value": "/"
+          "name": "APP_NAME",
+          "value": "Laravel"
+        },
+        {
+          "name": "APP_ENV",
+          "value": "production"
+        },
+        {
+          "name": "APP_KEY",
+          "value": "base64:sJiOULrbFGy9EL3fRzS947ipOnlwGR3yh3vXvTJwI4o="
+        },
+        {
+          "name": "APP_URL",
+          "value": "http://laravel-realworld-1507555845.ap-southeast-2.elb.amazonaws.com"
         }
       ],
       "portMappings": [

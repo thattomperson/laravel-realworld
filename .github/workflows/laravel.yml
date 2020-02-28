@@ -56,7 +56,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      run: composer install -q --no-dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
@@ -86,4 +86,4 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: laravel-realworld-service
         cluster: default
-        wait-for-service-stability: true
+        wait-for-service-stability: false
