@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@show')->name('home');
+
+
+/* Auth */
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
+    Route::post('/login', 'AuthController@login');
+
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('auth.register');
+    Route::post('/register', 'Auth\RegisterController@register');
+
+    Route::get('/thanks', 'HomeController@thanks')->name('auth.thanks');
+    Route::get('/verify', 'Auth\VerificationController@verify')->name('auth.verify');
 });
