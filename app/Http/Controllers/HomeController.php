@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\Article;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,11 +11,11 @@ class HomeController extends Controller
 {
     public function showGlobal()
     {
-        $posts = Post::paginate();
+        $article = Article::paginate();
         $tags = Tag::all();
 
         return view('home')
-            ->withPosts($posts)
+            ->withArticles($article)
             ->withTags($tags)
             ->withPage('global');
     }
@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $posts = Post::whereHas('likes', function ($query) use ($user) {
+        $articles = Article::whereHas('likes', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->orWhereHas('author.followers', function ($query) use ($user) {
             $query->where('follower_id', $user->id);
@@ -33,7 +33,7 @@ class HomeController extends Controller
         $tags = Tag::all();
 
         return view('home')
-            ->withPosts($posts)
+            ->withArticles($articles)
             ->withTags($tags)
             ->withPage('feed');
     }
@@ -42,14 +42,14 @@ class HomeController extends Controller
     {
         $tag = Tag::find($tagId);
 
-        $posts = Post::whereHas('tags', function ($query) use ($tag) {
+        $articles = Article::whereHas('tags', function ($query) use ($tag) {
             $query->where('tags.id', $tag->id);
         })->paginate();
 
         $tags = Tag::all();
 
         return view('home')
-            ->withPosts($posts)
+            ->withArticles($articles)
             ->withTags($tags)
             ->withTag($tag)
             ->withPage('tag');

@@ -13,5 +13,7 @@ RUN docker-php-ext-install mbstring pdo \
     && a2enmod rewrite negotiation \
     && docker-php-ext-install opcache
 
-RUN touch /srv/app/database/database.sqlite \
-    && php artisan migrate
+RUN rm /srv/app/database/database.sqlite || true \
+    && touch /srv/app/database/database.sqlite \
+    && php artisan migrate \ 
+    && php artisan db:seed

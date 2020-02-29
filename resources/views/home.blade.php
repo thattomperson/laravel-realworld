@@ -30,16 +30,16 @@
           </ul>
         </div>
         
-        @forelse($posts as $post)
-          @include('partial.article', ['post' => $post])
+        @forelse($articles as $article)
+          @include('partial.article', ['article' => $article])
         @empty
-          <h2>There are no posts here</h2>
+          <h2>There are no articles here</h2>
           @if($page == 'feed')
           <h3>Try following some authors or liking some articles</h3>
           @endif
         @endforelse
 
-        {{ $posts }}
+        {{ $articles }}
       </div>
 
       <div class="col-md-3">

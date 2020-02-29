@@ -6,24 +6,28 @@
     <div class="banner">
       <div class="container">
   
-        <h1>How to build webapps that scale</h1>
+        <h1>{{ $article->name }}</h1>
   
         <div class="article-meta">
-          <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+          <a href=""><img src="{{ $article->author->avatar() }}" /></a>
           <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
+            <a href="" class="author">{{ $article->author->name }}</a>
+            <span class="date">{{ $article->created_at->format('F dS') }}
+                @if($article->created_at->year !== now()->year)
+                  {{ $article->created_at->format('Y') }}
+                @endif
+            </span>
           </div>
           <button class="btn btn-sm btn-outline-secondary">
             <i class="ion-plus-round"></i>
             &nbsp;
-            Follow Eric Simons <span class="counter">(10)</span>
+            Follow {{ $article->author->name }} <span class="counter">({{ $followerCount }})</span>
           </button>
           &nbsp;&nbsp;
           <button class="btn btn-sm btn-outline-primary">
             <i class="ion-heart"></i>
             &nbsp;
-            Favorite Post <span class="counter">(29)</span>
+            Favorite Article <span class="counter">({{ $likeCount }})</span>
           </button>
         </div>
   
@@ -34,11 +38,7 @@
   
       <div class="row article-content">
         <div class="col-md-12">
-          <p>
-          Web development technologies have evolved at an incredible clip over the past few years.
-          </p>
-          <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-          <p>It's a great solution for learning how other frameworks work.</p>
+          @markdown($article->body)
         </div>
       </div>
   
@@ -46,22 +46,26 @@
   
       <div class="article-actions">
         <div class="article-meta">
-          <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+          <a href="{{ route('profile.show', $article->author->id) }}"><img src="{{ $article->author->avatar() }}" /></a>
           <div class="info">
-            <a href="" class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
+            <a href="" class="author">{{ $article->author->name }}</a>
+            <span class="date">{{ $article->created_at->format('F dS') }}
+                @if($article->created_at->year !== now()->year)
+                  {{ $article->created_at->format('Y') }}
+                @endif
+            </span>
           </div>
   
           <button class="btn btn-sm btn-outline-secondary">
             <i class="ion-plus-round"></i>
             &nbsp;
-            Follow Eric Simons <span class="counter">(10)</span>
+            Follow {{ $article->author->name }} <span class="counter">({{ $followerCount }})</span>
           </button>
           &nbsp;
           <button class="btn btn-sm btn-outline-primary">
             <i class="ion-heart"></i>
             &nbsp;
-            Favorite Post <span class="counter">(29)</span>
+            Favorite Article <span class="counter">({{ $likeCount }})</span>
           </button>
         </div>
       </div>

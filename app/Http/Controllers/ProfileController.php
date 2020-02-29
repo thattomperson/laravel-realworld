@@ -12,13 +12,13 @@ class ProfileController extends Controller
         $user = User::find($userId);
 
         if ($request->has('favourites')) {
-            $posts = $user->likes()->paginate();
+            $articles = $user->likes()->paginate();
         } else {
-            $posts = $user->posts()->paginate();
+            $articles = $user->articles()->paginate();
         }
 
         return view('profile')
             ->withUser($user)
-            ->withPosts($posts);
+            ->withArticles($articles);
     }
 }

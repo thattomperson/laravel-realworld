@@ -49,22 +49,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function likes()
     {
-        return $this->belongsToMany(Post::class, 'likes');
+        return $this->belongsToMany(Article::class, 'likes');
     }
 
-    public function posts()
+    public function articles()
     {
-        return $this->hasMany(Post::class, 'author_id');
+        return $this->hasMany(Article::class, 'author_id');
     }
 
-    public function like(Post $post)
+    public function like(Article $article)
     {
-        return $this->likes()->attach($post->id);
+        return $this->likes()->attach($article->id);
     }
 
-    public function unlike(Post $post)
+    public function unlike(Article $article)
     {
-        return $this->likes()->detach($post->id);
+        return $this->likes()->detach($article->id);
     }
 
     public function followers()

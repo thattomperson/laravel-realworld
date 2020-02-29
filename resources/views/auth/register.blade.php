@@ -13,6 +13,7 @@
   
           @if($errors->any())
           <ul class="error-messages">
+              @dd($errors)
               @foreach ($errors as $error)
               <li>{{ $error }}</li>
               @endforeach

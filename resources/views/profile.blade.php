@@ -33,12 +33,11 @@
           </ul>
         </div>
 
-        @forelse($posts as $post)
-          @include('partial.article', ['post' => $post])
+        @forelse($articles as $article)
+          @include('partial.article', ['article' => $article])
         @empty
-          <h2>No posts here</h2>
+          <h2>No articles here</h2>
         @endforelse
-
 
       </div>
 

@@ -19,18 +19,18 @@ class CreateTagsTable extends Migration
             $table->string('slug');
         });
 
-        Schema::create('post_tag', function (Blueprint $table) {
+        Schema::create('article_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('tag_id');
-            $table->bigInteger('post_id');
+            $table->bigInteger('article_id');
 
             $table->foreign('tag_id')
                 ->references('id')
                 ->on('tags');
 
-            $table->foreign('post_id')
+            $table->foreign('article_id')
                 ->references('id')
-                ->on('posts');
+                ->on('articles');
         });
     }
 
@@ -42,6 +42,6 @@ class CreateTagsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tags');
-        Schema::dropIfExists('tags_posts');
+        Schema::dropIfExists('article_tag');
     }
 }

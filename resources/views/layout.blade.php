@@ -21,7 +21,7 @@
           @if(Auth::check())
             <li class="nav-item">
               <a class="nav-link" href="{{ route('article.create') }}">
-                <i class="ion-compose"></i>&nbsp;New Post
+                <i class="ion-compose"></i>&nbsp;New Article
               </a>
             </li>
             <li class="nav-item">

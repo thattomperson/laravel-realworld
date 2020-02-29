@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Post;
+use App\Article;
 use App\Tag;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,47 +13,47 @@ class HomePageTest extends TestCase
 
     use RefreshDatabase;
 
-    public function testPostOnHomePage()
+    public function testArticleOnHomePage()
     {
-        $post = factory(Post::class)->create();
+        $article = factory(Article::class)->create();
 
         $response = $this->get('/');
         $response->assertOk();
 
-        $response->assertSee($post->name);
+        $response->assertSee($article->name);
     }
 
-    public function testPostOnTagPage()
+    public function testArticleOnTagPage()
     {
         $tag = factory(Tag::class)->create();
 
-        $post = factory(Post::class)->create();
-        $otherPost = factory(Post::class)->create();
+        $article = factory(Article::class)->create();
+        $otherArticle = factory(Article::class)->create();
 
-        $post->tags()->sync([$tag->id]);
+        $article->tags()->sync([$tag->id]);
 
         $response = $this->get('/tag/' . $tag->id);
         $response->assertOk();
 
-        $response->assertSee($post->name);
-        $response->assertDontSee($otherPost->name);
+        $response->assertSee($article->name);
+        $response->assertDontSee($otherArticle->name);
     }
 
-    public function testFavPostsOnFeedPage()
+    public function testFavArticlesOnFeedPage()
     {
         $user = factory(User::class)->create();
 
-        $post = factory(Post::class)->create();
-        $followPost = factory(Post::class)->create();
-        $otherPost = factory(Post::class)->create();
+        $article = factory(Article::class)->create();
+        $followArticle = factory(Article::class)->create();
+        $otherArticle = factory(Article::class)->create();
 
-        $user->like($post);
-        $user->follow($followPost->author);
+        $user->like($article);
+        $user->follow($followArticle->author);
 
         $this->actingAs($user)
             ->get('/feed')
-            ->assertSee($post->name)
-            ->assertSee($followPost->name)
-            ->assertDontSee($otherPost->name);
+            ->assertSee($article->name)
+            ->assertSee($followArticle->name)
+            ->assertDontSee($otherArticle->name);
     }
 }

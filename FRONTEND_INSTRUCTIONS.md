@@ -20,9 +20,9 @@ Simply point your [API requests](https://github.com/gothinkster/realworld/tree/m
     - Render markdown from server client side
     - Comments section at bottom of page
     - Delete comment button (only shown to comment's author)
-- Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
+- Profile page (URL: /#/profile/:username, /#/profile/:username/favourites )
     - Show basic user info
-    - List of articles populated from author's created articles or author's favorited articles
+    - List of articles populated from author's created articles or author's favourites articles
 
 # Styles
 

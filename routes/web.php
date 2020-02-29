@@ -17,8 +17,8 @@ Route::get('/tag/{id}', 'HomeController@showTag')->name('home.tag');
 
 Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 
-Route::get('/post/{id}', 'PostController@show')->name('post.show');
-Route::get('/post/create', 'PostController@create')->name('post.create');
+Route::get('/article/{id}', 'ArticleController@show')->name('article.show');
+Route::get('/article/create', 'ArticleController@create')->name('article.create');
 
 /* Auth */
-Auth::routes();
+Auth::routes(['verify' => true]);

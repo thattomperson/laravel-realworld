@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Post;
+use App\Article;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Post::class, function (Faker $faker) {
+$factory->define(Article::class, function (Faker $faker) {
     $name = $faker->sentence;
 
     return [
