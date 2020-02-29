@@ -13,7 +13,7 @@
   
           @if($errors->any())
           <ul class="error-messages">
-              @foreach ($errors as $error)
+              @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
               @endforeach
           </ul>
@@ -22,10 +22,10 @@
           <form method="POST">
               @csrf
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="text" placeholder="Email">
+              <input name="email" class="form-control form-control-lg" type="text" placeholder="Email">
             </fieldset>
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" type="password" placeholder="Password">
+              <input name="password" class="form-control form-control-lg" type="password" placeholder="Password">
             </fieldset>
             <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
               Login
