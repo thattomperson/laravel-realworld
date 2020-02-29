@@ -12,3 +12,6 @@ WORKDIR /srv/app
 RUN docker-php-ext-install mbstring pdo \ 
     && a2enmod rewrite negotiation \
     && docker-php-ext-install opcache
+
+RUN touch /srv/app/database/database.sqlite \
+    && php artisan migrate

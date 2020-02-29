@@ -38,12 +38,57 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Returns the url of this users Gravatar
+     * Returns the url of this users avatar from Gravatar
      *
-     * @return void
+     * @return string
      */
     public function avatar()
     {
         return "https://www.gravatar.com/avatar/" . md5(\strtolower($this->email));
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class, 'likes');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    public function like(Post $post)
+    {
+        return $this->likes()->attach($post->id);
+    }
+
+    public function unlike(Post $post)
+    {
+        return $this->likes()->detach($post->id);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function follow(User $user)
+    {
+        return $user->addFollower($this);
+    }
+
+    public function unfollow(User $user)
+    {
+        $user->removeFollower($this);
+    }
+
+    public function  addFollower(User $user)
+    {
+        $this->followers()->attach($user->id);
+    }
+
+    public function removeFollower(User $user)
+    {
+        $this->followers()->detach($user->id);
     }
 }

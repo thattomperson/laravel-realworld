@@ -11,38 +11,37 @@
   </head>
   <body>
 
-     <nav class="navbar navbar-light">
+    <nav class="navbar navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="index.html">conduit</a>
+        <a class="navbar-brand" href="{{ route('home.global') }}">conduit</a>
         <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('home.global') }}">Home</a>
+          </li>
+          @if(Auth::check())
             <li class="nav-item">
-                <!-- Add "active" class when you're on that page" -->
-                <a class="nav-link" href="">Home</a>
+              <a class="nav-link" href="{{ route('article.create') }}">
+                <i class="ion-compose"></i>&nbsp;New Post
+              </a>
             </li>
-        @if(Auth::check())
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-compose"></i>&nbsp;New Post
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">
-              <img src="{{ Auth::user()->avatar() }}?s=20">&nbsp;{{ Auth::user()->name }}
-            </a>
-          </li>
-          <li class="nav-item">
-            <form action="/logout" method="POST">
-                @csrf
-                <button class="nav-link btn" type="submit">Logout</button>
-            </form>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('profile.show', [Auth::user()->id]) }}">
+                <img src="{{ Auth::user()->avatar() }}?s=20">&nbsp;{{ Auth::user()->name }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button class="nav-link btn" type="submit">Logout</button>
+              </form>
+            </li>
           @else
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('register') }}">Register</a>
+            </li>
           @endif
         </ul>
       </div>
