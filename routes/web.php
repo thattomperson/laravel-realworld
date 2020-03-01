@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@showGlobal')->name('home.global');
-Route::get('/feed', 'HomeController@showFeed')->name('home.feed')->middleware('auth');
-Route::get('/tag/{id}', 'HomeController@showTag')->name('home.tag');
+Route::get('/', 'HomeController@show')->name('home');
 
 Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
 
 Route::get('/article/{id}', 'ArticleController@show')->name('article.show');
 Route::get('/article/create', 'ArticleController@create')->name('article.create');
+Route::post('/article/{id}/like', 'ArticleController@like')->name('article.like')->middleware('auth');
 
 /* Auth */
 Auth::routes(['verify' => true]);

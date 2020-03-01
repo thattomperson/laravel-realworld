@@ -9,9 +9,9 @@
         <h1>{{ $article->name }}</h1>
   
         <div class="article-meta">
-          <a href=""><img src="{{ $article->author->avatar() }}" /></a>
+            <a href="{{ route('profile.show', [$article->author->id]) }}"><img src="{{ $article->author->avatar() }}" /></a>
           <div class="info">
-            <a href="" class="author">{{ $article->author->name }}</a>
+            <a href="{{ route('profile.show', [$article->author->id]) }}" class="author">{{ $article->author->name }}</a>
             <span class="date">{{ $article->created_at->format('F dS') }}
                 @if($article->created_at->year !== now()->year)
                   {{ $article->created_at->format('Y') }}
@@ -24,11 +24,14 @@
             Follow {{ $article->author->name }} <span class="counter">({{ $followerCount }})</span>
           </button>
           &nbsp;&nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp;
-            Favorite Article <span class="counter">({{ $likeCount }})</span>
-          </button>
+          <form method="POST" action="{{ route('article.like', [$article->id]) }}" class="list-inline-item">
+            @csrf
+            <button class="btn btn-sm btn-outline-primary">
+              <i class="ion-heart"></i>
+              &nbsp;
+              Favorite Article <span class="counter">({{ $likeCount }})</span>
+            </button>
+          </form>
         </div>
   
       </div>
@@ -48,7 +51,7 @@
         <div class="article-meta">
           <a href="{{ route('profile.show', $article->author->id) }}"><img src="{{ $article->author->avatar() }}" /></a>
           <div class="info">
-            <a href="" class="author">{{ $article->author->name }}</a>
+            <a href="{{ route('profile.show', [$article->author->id]) }}" class="author">{{ $article->author->name }}</a>
             <span class="date">{{ $article->created_at->format('F dS') }}
                 @if($article->created_at->year !== now()->year)
                   {{ $article->created_at->format('Y') }}

@@ -9,49 +9,48 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function showGlobal()
+    public function show(Request $request)
     {
-        $article = Article::paginate();
-        $tags = Tag::all();
+        $data = [
+            'tags' => Tag::all(),
+        ];
 
-        return view('home')
-            ->withArticles($article)
-            ->withTags($tags)
-            ->withPage('global');
-    }
+        if ($request->has('feed')) {
+            // my "feed"
+            // only works with logged in users
+            if (Auth::guest()) {
+                // redirect to the "normal" page if they aren't logged in 
+                return redirect(route('home'));
+            }
 
-    public function showFeed()
-    {
-        $user = Auth::user();
+            // Now grab all articles I've liked or authored by people I follow
+            $data['articles'] = Article::whereHas('likes', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })->orWhereHas('author.followers', function ($query) {
+                $query->where('follower_id', Auth::user()->id);
+            })->paginate();
 
-        $articles = Article::whereHas('likes', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->orWhereHas('author.followers', function ($query) use ($user) {
-            $query->where('follower_id', $user->id);
-        })->paginate();
+            $data['page'] = 'feed';
+        } else if ($request->has('tag')) {
+            // we requested a specific tag
+            // grab it and find all articles with that tag
 
-        $tags = Tag::all();
+            $tag = Tag::find($request->get('tag'));
 
-        return view('home')
-            ->withArticles($articles)
-            ->withTags($tags)
-            ->withPage('feed');
-    }
+            $data['articles'] = Article::whereHas('tags', function ($query) use ($tag) {
+                $query->where('tags.id', $tag->id);
+            })->paginate();
 
-    public function showTag($tagId)
-    {
-        $tag = Tag::find($tagId);
+            $data['tag'] = $tag;
+            $data['page'] = 'tag';
+        } else {
+            // normal page
+            // just get all the articles 
 
-        $articles = Article::whereHas('tags', function ($query) use ($tag) {
-            $query->where('tags.id', $tag->id);
-        })->paginate();
+            $data['articles'] = Article::paginate();
+            $data['page'] = 'global';
+        }
 
-        $tags = Tag::all();
-
-        return view('home')
-            ->withArticles($articles)
-            ->withTags($tags)
-            ->withTag($tag)
-            ->withPage('tag');
+        return view('home')->with($data);
     }
 }

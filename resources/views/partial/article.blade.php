@@ -12,9 +12,12 @@
       </span>
     </div>
 
-    <button class="btn btn-outline-primary btn-sm pull-xs-right @guest distabled @endguest">
-      <i class="ion-heart"></i> {{ $article->likes()->count() }}
-    </button>
+    <form method="POST" action="{{ route('article.like', [$article->id]) }}">
+      @csrf
+      <button type="submit" class="btn btn-outline-primary btn-sm pull-xs-right @guest disabled @endguest">
+        <i class="ion-heart"></i> {{ $article->likes_count }}
+      </button>
+    </form>
   </div>
   <a href="{{ route('article.show', [$article->id]) }}" class="preview-link">
     <h1>{{ $article->name }}</h1>

@@ -13,10 +13,10 @@
 
     <nav class="navbar navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="{{ route('home.global') }}">conduit</a>
+        <a class="navbar-brand" href="{{ route('home') }}">conduit</a>
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('home.global') }}">Home</a>
+            <a class="nav-link" href="{{ route('home') }}">Home</a>
           </li>
           @if(Auth::check())
             <li class="nav-item">
