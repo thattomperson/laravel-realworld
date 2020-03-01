@@ -32,7 +32,7 @@ class HomePageTest extends TestCase
 
         $article->tags()->sync([$tag->id]);
 
-        $response = $this->get('/tag/' . $tag->id);
+        $response = $this->get('/?tag=' . $tag->id);
         $response->assertOk();
 
         $response->assertSee($article->name);
@@ -51,7 +51,7 @@ class HomePageTest extends TestCase
         $user->follow($followArticle->author);
 
         $this->actingAs($user)
-            ->get('/feed')
+            ->get('/?feed')
             ->assertSee($article->name)
             ->assertSee($followArticle->name)
             ->assertDontSee($otherArticle->name);
