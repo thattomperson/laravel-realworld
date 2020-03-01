@@ -18,11 +18,12 @@ Artisan::command('refresh', function () {
     try {
         $this->info('Deleting database');
         unlink(database_path('database.sqlite'));
-    } finally {
-        $this->info('Creating new database');
-        touch(database_path('database.sqlite'));
-
-        Artisan::call('migrate', ['--force' => true], $this->getOutput());
-        Artisan::call('db:seed', ['--force' => true], $this->getOutput());
+    } catch (Exception $e) {
     }
+
+    $this->info('Creating new database');
+    touch(database_path('database.sqlite'));
+
+    Artisan::call('migrate', ['--force' => true], $this->getOutput());
+    Artisan::call('db:seed', ['--force' => true], $this->getOutput());
 })->describe('Refresh the whole database');
