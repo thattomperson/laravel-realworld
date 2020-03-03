@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@show')->name('home');
 
 Route::get('/profile/{id}', 'ProfileController@show')->name('profile.show');
+Route::post('/profile/{id}/follow', 'ProfileController@show')->name('profile.follow');
 
 Route::get('/article/{id}', 'ArticleController@show')->name('article.show');
 Route::get('/article/create', 'ArticleController@create')->name('article.create');

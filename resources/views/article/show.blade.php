@@ -18,20 +18,9 @@
                 @endif
             </span>
           </div>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp;
-            Follow {{ $article->author->name }} <span class="counter">({{ $followerCount }})</span>
-          </button>
+          <x-follow-button :user="$article->author" />
           &nbsp;&nbsp;
-          <form method="POST" action="{{ route('article.like', [$article->id]) }}" class="list-inline-item">
-            @csrf
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="ion-heart"></i>
-              &nbsp;
-              Favorite Article <span class="counter">({{ $likeCount }})</span>
-            </button>
-          </form>
+          <x-like-button :article="$article" />
         </div>
   
       </div>
@@ -59,17 +48,9 @@
             </span>
           </div>
   
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp;
-            Follow {{ $article->author->name }} <span class="counter">({{ $followerCount }})</span>
-          </button>
-          &nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp;
-            Favorite Article <span class="counter">({{ $likeCount }})</span>
-          </button>
+            <x-follow-button :user="$article->author" />
+            &nbsp;&nbsp;
+            <x-like-button :article="$article" />
         </div>
       </div>
   

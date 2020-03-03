@@ -12,10 +12,10 @@ class ArticleController extends Controller
     public function show($articleId)
     {
         $article = Article::find($articleId);
-        $followerCount = $article->author->followers()->count();
-        $likeCount = $article->likes()->count();
+        $article->author->loadCount('followers');
+        $article->loadCount('likes');
 
-        return view('article.show')->with(compact('article', 'followerCount', 'likeCount'));
+        return view('article.show')->withArticle($article);
     }
 
     public function like($articleId)
