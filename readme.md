@@ -1,2 +1,2 @@
 # Code Sample for Thirty4
-![Test & Deploy](https://github.com/thattomperson/laravel-realworld/workflows/Test%20&%20Deploy/badge.svg)
+![Test & Deploy](https://github.com/thattomperson/laravel-realworld/workflows/Test%20&%20Deploy/badge.svg) [![StyleCI](https://github.styleci.io/repos/243633618/shield?branch=master)](https://github.styleci.io/repos/243633618)
