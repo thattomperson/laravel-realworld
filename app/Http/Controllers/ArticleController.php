@@ -25,6 +25,7 @@ class ArticleController extends Controller
         $user = Auth::user();
         if ($user) {
             $user->like($article);
+
             return redirect()->back();
         }
 

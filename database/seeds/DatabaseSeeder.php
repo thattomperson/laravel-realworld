@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $u = factory(User::class)->create();
 
         factory(Article::class, 5)->create([
-            'author_id' => $u->id
+            'author_id' => $u->id,
         ]);
     }
 }

@@ -7,33 +7,33 @@ use Illuminate\View\Component;
 
 class LikeButton extends Component
 {
-  /**
-   * The alert message.
-   *
-   * @var Article
-   */
-  public $article;
+    /**
+     * The alert message.
+     *
+     * @var Article
+     */
+    public $article;
 
-  /**
-   * Create the component instance.
-   *
-   * @param  string  $type
-   * @param  string  $message
-   * @return void
-   */
-  public function __construct(Article $article)
-  {
-    $this->article = $article;
-  }
+    /**
+     * Create the component instance.
+     *
+     * @param  string  $type
+     * @param  string  $message
+     * @return void
+     */
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
 
-  /**
-   * Get the view / contents that represent the component.
-   *
-   * @return \Illuminate\View\View|string
-   */
-  public function render()
-  {
-    return <<<'blade'
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\View\View|string
+     */
+    public function render()
+    {
+        return <<<'blade'
     <form method="POST" action="{{ route('article.like', [$article->id]) }}" class="list-inline-item">
       @csrf
       <button class="btn btn-sm btn-outline-primary">
@@ -43,5 +43,5 @@ class LikeButton extends Component
       </button>
     </form>
     blade;
-  }
+    }
 }

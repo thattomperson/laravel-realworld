@@ -19,7 +19,7 @@ class HomeController extends Controller
             // my "feed"
             // only works with logged in users
             if (Auth::guest()) {
-                // redirect to the "normal" page if they aren't logged in 
+                // redirect to the "normal" page if they aren't logged in
                 return redirect(route('home'));
             }
 
@@ -31,7 +31,7 @@ class HomeController extends Controller
             })->paginate();
 
             $data['page'] = 'feed';
-        } else if ($request->has('tag')) {
+        } elseif ($request->has('tag')) {
             // we requested a specific tag
             // grab it and find all articles with that tag
 
@@ -45,7 +45,7 @@ class HomeController extends Controller
             $data['page'] = 'tag';
         } else {
             // normal page
-            // just get all the articles 
+            // just get all the articles
 
             $data['articles'] = Article::paginate();
             $data['page'] = 'global';

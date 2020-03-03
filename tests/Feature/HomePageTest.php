@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function testArticleOnHomePage()
@@ -32,7 +31,7 @@ class HomePageTest extends TestCase
 
         $article->tags()->sync([$tag->id]);
 
-        $response = $this->get('/?tag=' . $tag->id);
+        $response = $this->get('/?tag='.$tag->id);
         $response->assertOk();
 
         $response->assertSee($article->name);
